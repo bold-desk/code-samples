@@ -12,7 +12,7 @@ public class GetTickets
     {
         string domain = "YOUR_DOMAIN"; //Your bolddesk domain name.
 
-        string apiPath = "/api/v1/tickets/{ticketId}/details"; //Your API path.
+        string apiPath = "/api/v1/tickets/{ticketId}"; //Your API path.
 
         string apiKey = "YOUR_API_KEY"; //Your API key.
 
