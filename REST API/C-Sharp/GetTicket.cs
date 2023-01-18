@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-public class GetTickets
+public class GetTicket
 {
     static HttpClient client = new HttpClient(); // One HttpClient instance be reused.
                                                  //HttpClient is used to make WebAPI Request from console application.
