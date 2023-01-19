@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-public class Createcontact
+public class CreateContact
 {
     static HttpClient client = new HttpClient(); // One HttpClient instance be reused.
                                                  //HttpClient is used to make WebAPI Request from console application.
