@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-public class GetTickets
+public class CreateContact
 {
     static HttpClient client = new HttpClient(); // One HttpClient instance be reused.
                                                  //HttpClient is used to make WebAPI Request from console application.
@@ -12,7 +13,7 @@ public class GetTickets
     {
         string domain = "YOUR_DOMAIN"; //Your bolddesk domain name.
 
-        string apiPath = "/api/v1/tickets/{ticketId}"; //Your API path.
+        string apiPath = "/api/v1/contacts"; //Your API path.
 
         string apiKey = "YOUR_API_KEY"; //Your API key.
 
@@ -20,12 +21,19 @@ public class GetTickets
 
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //Header Value for Content type.
 
-        client.DefaultRequestHeaders.Add("x-api-key", apiKey); //For APIKEY Authentication.
+        client.DefaultRequestHeaders.Add("x-api-key", apiKey); //For Authentication access.
 
         try
         {
+            //Post data to create contacts.
+            var contactData = new Contact
+            {
+                ContactName = "James",
+                EmailId = "james@example.com",
+                ContactDisplayName = "Jade"             //Sample Data's for Required fields..        
+            };
 
-            HttpResponseMessage response = await client.GetAsync(apiPath).ConfigureAwait(false);//To send a GET request as an asynchronous operation to the specified Uri.
+            HttpResponseMessage response = await client.PostAsJsonAsync(apiPath, contactData).ConfigureAwait(false);//To send a POST request as an asynchronous operation to the specified Uri with the given value serialized as JSON.
 
             var responseData = await response.Content.ReadAsStringAsync().ConfigureAwait(false); //To read the response.
 
@@ -42,5 +50,16 @@ public class GetTickets
             Console.WriteLine(ex.Message);//Returns the error message.
             Console.WriteLine(ex.StackTrace);//Returns the stack at the time uncaught exception occurs.  
         }
+
     }
+}
+
+public class Contact
+{
+    public string ContactName { get; set; }
+
+    public string EmailId { get; set; }
+
+    public string ContactDisplayName { get; set; }
+
 }

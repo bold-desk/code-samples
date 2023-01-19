@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-public class GetContactGroups
+public class GetTicket
 {
     static HttpClient client = new HttpClient(); // One HttpClient instance be reused.
                                                  //HttpClient is used to make WebAPI Request from console application.
@@ -12,7 +12,7 @@ public class GetContactGroups
     {
         string domain = "YOUR_DOMAIN"; //Your bolddesk domain name.
 
-        string apiPath = "/api/v1/contact_groups/{contactGroupId}"; //Your API path.
+        string apiPath = "/api/v1/tickets/{ticketId}"; //Your API path.
 
         string apiKey = "YOUR_API_KEY"; //Your API key.
 
