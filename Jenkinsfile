@@ -4,20 +4,6 @@ timestamps
 {
   timeout(time: 7200000, unit: 'MILLISECONDS')
   {
-	stage 'Install Software'
-	try
-	{
-        //Set Time Zone
-        echo "Setting Time Zone as India Standard Time..."
-        bat 'tzutil /s "India Standard Time"'
-        echo "Time Zone changed successfully..."
-	}
-	catch(Exception e)
-    {
-        echo "Exception in Install Software stage \r\n"+e
-        currentBuild.result = 'FAILURE'
-    }
-
     stage 'Checkout'
     try
     {
@@ -37,7 +23,6 @@ timestamps
 			gitlabCommitStatus("Code violation")
 			{
 				bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target GitLeaks"+ " -settings_skipverification=true"
-				currentBuild.result = 'FAILURE'
 			}
 		}
 		catch(Exception e)
