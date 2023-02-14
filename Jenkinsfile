@@ -1,46 +1,103 @@
-node ('BoldDesk')
+node ('BoldDesk') 
 {
 timestamps
 {
-  timeout(time: 2700000, unit: 'MILLISECONDS')
+  timeout(time: 2700000, unit: 'MILLISECONDS') 
   {
-    stage 'Checkout'
-    try
+	stage 'Install Software'
+	try
+	{
+        //Set Time Zone
+        echo "Setting Time Zone as India Standard Time..."
+        bat 'tzutil /s "India Standard Time"'
+        echo "Time Zone changed successfully..."
+	}
+	catch(Exception e)
     {
-		checkout scm
+        echo "Exception in Install Software stage \r\n"+e
+        currentBuild.result = 'FAILURE'
+    }
+
+    stage 'Checkout' 
+    try
+    {	
+	    checkout scm
     }
     catch(Exception e)
     {
         echo "Exception in checkout stage \r\n"+e
         currentBuild.result = 'FAILURE'
-    }
+    }     
 	
-	if(currentBuild.result != 'FAILURE')
+if(currentBuild.result != 'FAILURE')
+{ 
+	stage 'Build Source'
+	try
+	{		
+	    gitlabCommitStatus("Build")
+		{
+			bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target build -NugetServerUrl "+env.nugetserverurl + " -settings_skipverification=true"
+	 	}
+            def files = findFiles(glob: '**/cireports/errorlogs/*.txt')
+
+            if(files.size() > 0)
+            {
+                currentBuild.result = 'FAILURE'
+            }
+    }
+	catch(Exception e) 
+    {
+        echo "Exception in build source stage \r\n"+e
+		currentBuild.result = 'FAILURE'
+    }
+} 
+
+if(currentBuild.result != 'FAILURE')
+{
+	stage 'Code violation'
+	try
 	{
-		stage 'GitLeaks'
-		try
+		gitlabCommitStatus("Code violation")
 		{
-			gitlabCommitStatus("GitLeaks")
-			{
-				bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target GitLeaks"+ " -settings_skipverification=true"
-			}
-		}
-		catch(Exception e)
-		{
-			echo "Exception in GitLeaks stage \r\n"+e
-			currentBuild.result = 'FAILURE'
+			bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target codeviolation"+ " -settings_skipverification=true"
 		}
 	}
+	catch(Exception e) 
+	{
+		echo "Exception in code violation stage \r\n"+e
+		currentBuild.result = 'FAILURE'
+	}
+}
+ 
+ if(currentBuild.result != 'FAILURE' && env.publishBranch.contains(githubSourceBranch))
+ { 
+	 stage 'Publish'
+	 try
+	 {	    
+	     gitlabCommitStatus("Publish")
+		 {			
+			  bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target publish -nugetapikey "+env.nugetapikey+' -revisionNumber '+env.revisionNumber+' -nugetserverurl '+env.nexusnugetserverurl+" -StudioVersion "+env.studio_version
+	 	 }
+     } 
+	  catch(Exception e) 
+     {
+		 currentBuild.result = 'FAILURE'
+     }
+  }	
+
 
 	stage 'Delete Workspace'
+	
+	// Archiving artifacts when the folder was not empty
+	
+    def files = findFiles(glob: '**/cireports/**/*.*')      
     
-    // Archiving artifacts when the folder was not empty
-    if(fileExists('cireports'))
-    {
-        archiveArtifacts artifacts: 'cireports/', excludes: null
+    if(files.size() > 0) 		
+    { 		
+        archiveArtifacts artifacts: 'cireports/', excludes: null 		
     }
-    
-    step([$class: 'WsCleanup'])
-}
+	
+	   step([$class: 'WsCleanup']) 	
+	   }
 }
 }
