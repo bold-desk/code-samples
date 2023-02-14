@@ -4,6 +4,8 @@ timestamps
 {
   timeout(time: 7200000, unit: 'MILLISECONDS')
   {
+	currentBuild.result = 'SUCCESS'
+
     stage 'Checkout'
     try
     {
@@ -14,6 +16,29 @@ timestamps
         echo "Exception in checkout stage \r\n"+e
         currentBuild.result = 'FAILURE'
     }
+
+	if(currentBuild.result != 'FAILURE')
+	{
+		stage 'Build Source'
+		try
+		{
+			gitlabCommitStatus("Build")
+			{
+				bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target build -NugetServerUrl "+env.nugetserverurl + " -settings_skipverification=true"
+			}
+            def files = findFiles(glob: '**/cireports/errorlogs/*.txt')
+
+            if(files.size() > 0)
+            {
+                currentBuild.result = 'FAILURE'
+            }
+		}
+		catch(Exception e)
+		{
+			echo "Exception in build source stage \r\n"+e
+			currentBuild.result = 'FAILURE'
+		}
+	}
 
 	if(currentBuild.result != 'FAILURE')
 	{

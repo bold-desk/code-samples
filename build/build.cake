@@ -7,6 +7,12 @@ var target = Argument("target", "Default");
 var cireports = Argument("cireports","../cireports");
 var DetectSecretScanReportDir = cireports + "/secret";
 
+Task("Build")
+	.Does(() =>
+	{
+		
+	});
+
 Task("Download-GitLeaks")
   .WithCriteria( !FileExists("./tools/GitLeaks-exe.zip"))
   .ContinueOnError()
