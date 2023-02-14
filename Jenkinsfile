@@ -37,6 +37,7 @@ timestamps
 			gitlabCommitStatus("Code violation")
 			{
 				bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target GitLeaks"+ " -settings_skipverification=true"
+				currentBuild.result = 'FAILURE'
 			}
 		}
 		catch(Exception e)
