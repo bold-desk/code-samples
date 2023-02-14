@@ -15,22 +15,22 @@ timestamps
         currentBuild.result = 'FAILURE'
     }     
 	
-if(currentBuild.result != 'FAILURE')
-{
-	stage 'Code violation'
-	try
+	if(currentBuild.result != 'FAILURE')
 	{
-		gitlabCommitStatus("Code violation")
+		stage 'Code violation'
+		try
 		{
-			bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target GitLeaks"+ " -settings_skipverification=true"
+			gitlabCommitStatus("Code violation")
+			{
+				bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target GitLeaks"+ " -settings_skipverification=true"
+			}
+		}
+		catch(Exception e) 
+		{
+			echo "Exception in code violation stage \r\n"+e
+			currentBuild.result = 'FAILURE'
 		}
 	}
-	catch(Exception e) 
-	{
-		echo "Exception in code violation stage \r\n"+e
-		currentBuild.result = 'FAILURE'
-	}
-}
 	stage 'Delete Workspace'
 	
 	// Archiving artifacts when the folder was not empty
