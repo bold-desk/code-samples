@@ -10,7 +10,7 @@ var DetectSecretScanReportDir = cireports + "/secret";
 Task("Build")
 	.Does(() =>
 	{
-		
+		//Build Task
 	});
 
 Task("Download-GitLeaks")
@@ -70,6 +70,7 @@ Task("GitLeaks")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
+	.IsDependentOn("Build")
 	.IsDependentOn("GitLeaks");
 
 //////////////////////////////////////////////////////////////////////

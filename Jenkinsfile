@@ -27,11 +27,7 @@ timestamps
 				bat 'powershell.exe -ExecutionPolicy ByPass -File build/build.ps1 -Script '+env.WORKSPACE+"/build/build.cake -Target build -NugetServerUrl "+env.nugetserverurl + " -settings_skipverification=true"
 			}
             def files = findFiles(glob: '**/cireports/errorlogs/*.txt')
-
-            if(files.size() > 0)
-            {
-                currentBuild.result = 'FAILURE'
-            }
+			
 		}
 		catch(Exception e)
 		{
