@@ -34,15 +34,12 @@ if(currentBuild.result != 'FAILURE')
 	stage 'Delete Workspace'
 	
 	// Archiving artifacts when the folder was not empty
-	
-    def files = findFiles(glob: '**/cireports/**/*.*')      
-    
-    if(files.size() > 0) 		
-    { 		
-        archiveArtifacts artifacts: 'cireports/', excludes: null 		
+    if(fileExists('cireports'))
+    {
+        archiveArtifacts artifacts: 'cireports/', excludes: null
     }
-	
-	   step([$class: 'WsCleanup']) 	
-	   }
+    
+    step([$class: 'WsCleanup'])
+  }
 }
 }
