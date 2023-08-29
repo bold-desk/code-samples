@@ -30,7 +30,18 @@ public class Createcontact
             {
                 ContactName = "James",
                 EmailId = "james@example.com",
-                ContactDisplayName = "Jade"             //Sample Data's for Required fields..        
+                SecondaryEmailId = "larry@example.com",
+                ContactDisplayName = "Jade",             //Sample Data's for Required fields..        
+                ContactPhoneNo = "9876545789",
+                ContactMobileNo = "9876512345",
+                ContactAddress = "4th Lane, East America",
+                ContactJobTitle = "Support Engineer",
+                TimeZoneId = 1,
+                LanguageId = 1,
+                ContactNotes = "Sample Note",
+                ContactExternalReferenceId = "1",
+                ContactTag = "Sample_Tag",
+                IsVerified = true
             };
 
             HttpResponseMessage response = await client.PostAsJsonAsync(apiPath, contactData).ConfigureAwait(false);//To send a POST request as an asynchronous operation to the specified Uri with the given value serialized as JSON.
@@ -60,6 +71,28 @@ public class Contact
 
     public string EmailId { get; set; }
 
+    public string SecondaryEmailId { get; set; }
+
     public string ContactDisplayName { get; set; }
+
+    public string ContactPhoneNo { get; set; }
+
+    public string ContactMobileNo { get; set; }
+
+    public string ContactAddress { get; set; }
+
+    public string ContactJobTitle { get; set; }
+
+    public int TimeZoneId { get; set; }
+
+    public int LanguageId { get; set; }
+
+    public string ContactNotes { get; set; }
+
+    public string ContactExternalReferenceId { get; set; }
+
+    public string ContactTag { get; set; }
+
+    public bool IsVerified { get; set; }
 
 }

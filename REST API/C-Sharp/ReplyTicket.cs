@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -29,7 +30,18 @@ public class ReplyTicket
             var ticketData = new TicketUpdate    //Sample Data's to reply ticket.
             {
                 Description = "sample description",
-                ReplyOnBehalfOfRequester = false
+                Attachments = "tokenValue_1, tokenValue_2",
+                AtMentionUserIds = new List<int> { 1, 2 },
+                lastUpdateID = 12,
+                lastRefreshDate = "2022-02-21T08:04:19.785Z",
+                TimeSpent = 5,
+                MessageTags = "tag1,tag2",
+                UpdatedByUserIdOrEmailId = "12",
+                SkimEmailNotification = true,
+                TicketStatusId = 1,
+                Cc = new List<int> { 1, 2 },
+                ReplyOnBehalfOfRequester = false,
+                DontAppendOnBehalfOfRequesterMessage = true
             };
 
             HttpResponseMessage response = await client.PostAsJsonAsync(apiPath, ticketData).ConfigureAwait(false);//To send a POST request as an asynchronous operation to the specified Uri with the given value serialized as JSON.
@@ -56,5 +68,28 @@ public class ReplyTicket
 public class TicketUpdate
 {
     public string Description { get; set; } = string.Empty;
+
+    public string Attachments { get; set; }
+
+    public List<int> AtMentionUserIds { get; set; }
+
+    public long lastUpdateID { get; set; }
+
+    public string lastRefreshDate { get; set; }
+
+    public int TimeSpent { get; set; }
+
+    public string MessageTags { get; set; }
+
+    public string UpdatedByUserIdOrEmailId { get; set; }
+
+    public bool SkimEmailNotification { get; set; }
+
+    public int TicketStatusId { get; set; }
+
+    public List<int> Cc { get; set; }
+
     public bool ReplyOnBehalfOfRequester { get; set; }
+
+    public bool DontAppendOnBehalfOfRequesterMessage { get; set; }
 }

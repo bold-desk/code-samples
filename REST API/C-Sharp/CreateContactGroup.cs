@@ -29,7 +29,13 @@ public class CreateContactGroup
             //Post data to create contacts.
             var contactGroupData = new ContactGroups
             {
-                ContactGroupName = "Administration"   //sample data...
+                ContactGroupName = "Administration",   //sample data...
+                ContactGroupDescription = "Sample Description",
+                ContactGroupNotes = "Sample_Notes",
+                ContactGroupExternalReferenceId = "1",
+                ContactGroupAddress = "America",
+                ContactGroupTag = "Sample_Tag",
+                ContactGroupDomain = "yahodo.com, redhat.com"
             };
 
             HttpResponseMessage response = await client.PostAsJsonAsync(apiPath, contactGroupData).ConfigureAwait(false);//To send a POST request as an asynchronous operation to the specified Uri with the given value serialized as JSON.
@@ -57,4 +63,16 @@ public class CreateContactGroup
 public class ContactGroups
 {
     public string ContactGroupName { get; set; }
+
+    public string ContactGroupDescription { get; set; }
+
+    public string ContactGroupNotes { get; set; }
+
+    public string ContactGroupExternalReferenceId { get; set; }
+
+    public string ContactGroupAddress { get; set; }
+
+    public string ContactGroupTag { get; set; }
+
+    public string ContactGroupDomain { get; set; }
 }
