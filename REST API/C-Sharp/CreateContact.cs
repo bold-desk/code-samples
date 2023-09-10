@@ -67,13 +67,15 @@ public class Createcontact
 
 public class Contact
 {
+    public string ContactDisplayName { get; set; }
+
+    public int LanguageId { get; set; }
+
     public string ContactName { get; set; }
 
     public string EmailId { get; set; }
 
     public string SecondaryEmailId { get; set; }
-
-    public string ContactDisplayName { get; set; }
 
     public string ContactPhoneNo { get; set; }
 
@@ -85,8 +87,6 @@ public class Contact
 
     public int TimeZoneId { get; set; }
 
-    public int LanguageId { get; set; }
-
     public string ContactNotes { get; set; }
 
     public string ContactExternalReferenceId { get; set; }
@@ -95,4 +95,38 @@ public class Contact
 
     public bool IsVerified { get; set; }
 
+}
+
+public class contact1
+{
+    public string ContactDisplayName { get; set; }
+
+    public int LanguageId { get; set; }
+
+    public string ContactName { get; set; }
+
+    public string EmailId { get; set; }
+
+    public string SecondaryEmailId { get; set; }
+
+    public string ContactPhoneNo { get; set; }
+
+    public string ContactMobileNo { get; set; }
+
+    public string ContactAddress { get; set; }
+
+    public string ContactJobTitle { get; set; }
+
+    public List<ContactGroupCollectionObject>? ContactGroup { get; set; }
+
+    public Dictionary<string, object?>? CustomFields { get; set; }
+}
+
+public class ContactGroupCollectionObject
+{
+    public long id { get; set; }
+
+    public int accessScopeId { get; set; }
+
+    public bool isPrimary { get; set; }
 }

@@ -75,4 +75,6 @@ public class ContactGroups
     public string ContactGroupTag { get; set; }
 
     public string ContactGroupDomain { get; set; }
+
+    public Dictionary<string, object?>? CustomFields { get; set; }
 }

@@ -80,21 +80,23 @@ public class Ticket
 
     public string Subject { get; set; }
 
+    public string Description { get; set; }
+
+    public int PriorityId { get; set; }
+
+    public string RequesterName { get; set; }
+
     public long CategoryId { get; set; }
 
     public bool IsVisibileInCustomerPortal { get; set; }
 
     public long RequesterId { get; set; }
 
-    public string Description { get; set; }
-
     public long AgentId { get; set; }
 
     public int GroupId { get; set; }
 
     public string Attachments { get; set; }
-
-    public int PriorityId { get; set; }
 
     public string DueDate { get; set; }
 
@@ -106,13 +108,69 @@ public class Ticket
 
     public string RequesterEmailId { get; set; }
 
-    public string RequesterName { get; set; }
-
     public long ContactGroupId { get; set; }
 
     public string PhoneNumber { get; set; }
 
     public Dictionary<string, object?>? CustomFields { get; set; }
+}
 
+public class Ticket1
+{
+    public int BrandId { get; set; }
 
+    public string Subject { get; set; }
+
+    public string Description { get; set; }
+
+    public int PriorityId { get; set; }
+
+    public string RequesterName { get; set; }
+
+    public List<long> AttachmentIdList { get; set; } = new List<long>();
+
+    public List<long>? CC { get; set; }
+
+    public long? ContactGroup { get; set; }
+
+    public string? WatchersUserId { get; set; }
+
+    public bool? IsDataConsentGiven { get; set; }
+
+    public List<long>? AtMentionedUserIds { get; set; }
+
+    public bool SkipEmailNotification { get; set; }
+
+    public int? LinkTypeId { get; set; }
+
+    public long? LinkedTicketId { get; set; }
+}
+
+public class Ticket2
+{
+    public int BrandId { get; set; }
+
+    public string Subject { get; set; }
+
+    public string Description { get; set; }
+
+    public int PriorityId { get; set; }
+
+    public string RequesterName { get; set; }
+
+    public long CategoryId { get; set; }
+
+    public bool IsVisibileInCustomerPortal { get; set; }
+
+    public long RequesterId { get; set; }
+
+    public long AgentId { get; set; }
+
+    public List<long>? AtMentionedUserIds { get; set; }
+
+    public bool SkipEmailNotification { get; set; }
+
+    public int? LinkTypeId { get; set; }
+
+    public long? LinkedTicketId { get; set; }
 }
