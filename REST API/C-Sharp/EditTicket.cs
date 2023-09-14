@@ -32,7 +32,17 @@ public class EditTicket
                 fields = new Dictionary<string, object>()
                 {
                     {"priorityId" , 2 },
-                    {"resolutionDue", "2021-06-15T04:48:00.000Z" }
+                    {"resolutionDue", "2021-06-15T04:48:00.000Z" },
+                    {"categoryId": 519 },
+                    {"isVisibleInCustomerPortal": false},
+                    {"groupId": 694},
+                    {"agentId": 4122},
+                    {"CC": [12131, 13187, 9055]},
+                    {"Subject": "Sample Ticket " },
+                    {"StatusId": 2},
+                    {"tag": "Sample_tag"},
+                    {"externalReferenceId": "AB321"},
+                    {"TypeId": 2}
                 },
                 Notes = "Sample Notes"
             };

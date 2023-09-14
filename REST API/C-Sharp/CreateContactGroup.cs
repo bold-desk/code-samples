@@ -35,7 +35,13 @@ public class CreateContactGroup
                 ContactGroupExternalReferenceId = "1",
                 ContactGroupAddress = "America",
                 ContactGroupTag = "Sample_Tag",
-                ContactGroupDomain = "yahodo.com, redhat.com"
+                ContactGroupDomain = "yahodo.com, redhat.com",
+                CustomFields = new Dictionary<string, object?>
+                {
+                    { "cf_configure": "2023-09-16" },
+                    { "cf_contact_group_field_test": "test" },
+                    { "cf_group_report": "test"}
+                };
             };
 
             HttpResponseMessage response = await client.PostAsJsonAsync(apiPath, contactGroupData).ConfigureAwait(false);//To send a POST request as an asynchronous operation to the specified Uri with the given value serialized as JSON.

@@ -28,22 +28,41 @@ public class Createcontact
             //Post data to create contacts.
             var contactData = new Contact
             {
-                ContactName = "James",
-                EmailId = "james@example.com",
-                SecondaryEmailId = "larry@example.com",
-                ContactDisplayName = "Jade",             //Sample Data's for Required fields..        
-                ContactPhoneNo = "9876545789",
-                ContactMobileNo = "9876512345",
-                ContactAddress = "4th Lane, East America",
-                ContactJobTitle = "Support Engineer",
-                TimeZoneId = 1,
+                ContactName = "Albert",
+                EmailId = "albert345@gmail.com",
+                SecondaryEmailId = "albert123@gmail.com",
+                ContactDisplayName = "Albert einsten",             //Sample Data's for Required fields..        
+                ContactPhoneNo = "9562341875",
+                ContactMobileNo = "6532148975",
+                ContactAddress = "5th Lane, East America",
+                ContactJobTitle = "scientist",
+                TimeZoneId = 103,
                 LanguageId = 1,
                 ContactNotes = "Sample Note",
-                ContactExternalReferenceId = "1",
+                ContactExternalReferenceId = "A237",
                 ContactTag = "Sample_Tag",
                 IsVerified = true
             };
 
+            var contactData1 = new contact1
+            {
+                ContactDisplayName = "Shanmugam",
+                LanguageId = 1,
+                ContactName = "Shanmuga perumal",
+                EmailId = "Shanmugam567@gmail.com",
+                SecondaryEmailId = "Shanmugam854@gmail.com",
+                ContactPhoneNo = "8569374125",
+                ContactMobileNo = "9563241875",
+                ContactAddress = "6th floor, Aruna complex, North madras, Tamilnadu, india",
+                ContactJobTitle = "Plummer",
+                ContactGroup = [{ "id": 962, "accessScopeId": 2, "isPrimary": true}],
+                CustomFields = new Dictionary<string, object?>()
+                {
+                    { "cf_custom_dropdown_1": 74 }, 
+                    {"cf_engineer": 7465 }, 
+                    {"cf_laction": 5704}
+                };  
+            };
             HttpResponseMessage response = await client.PostAsJsonAsync(apiPath, contactData).ConfigureAwait(false);//To send a POST request as an asynchronous operation to the specified Uri with the given value serialized as JSON.
 
             var responseData = await response.Content.ReadAsStringAsync().ConfigureAwait(false); //To read the response.

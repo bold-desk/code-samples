@@ -31,7 +31,7 @@ public class ReplyTicket
             {
                 Description = "sample description",
                 Attachments = "tokenValue_1, tokenValue_2",
-                AtMentionUserIds = new List<int> { 1, 2 },
+                AtMentionUserIds = [234, 456],
                 lastUpdateID = 12,
                 lastRefreshDate = "2022-02-21T08:04:19.785Z",
                 TimeSpent = 5,
@@ -39,7 +39,7 @@ public class ReplyTicket
                 UpdatedByUserIdOrEmailId = "12",
                 SkimEmailNotification = true,
                 TicketStatusId = 1,
-                Cc = new List<int> { 1, 2 },
+                Cc = [675, 354],
                 ReplyOnBehalfOfRequester = false,
                 DontAppendOnBehalfOfRequesterMessage = true
             };
