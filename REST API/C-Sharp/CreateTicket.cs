@@ -26,7 +26,7 @@ public class CreateTicket
         try
         {
             //Post data to create ticket.
-            var ticketData = new Ticket    //Sample Data's for Required fields
+            var ticket = new Ticket    //Sample Data's for Required fields
             {
                 BrandId = 3,
                 Subject = "Sample ticket",
@@ -52,8 +52,9 @@ public class CreateTicket
                     { "cf_ticket_singleline": "Sample Single Line" }
                 };
             };
-
-            var ticketData1 = new Ticket1
+        
+            //Post data to create ticket detail.
+            var ticketDetail = new TicketDetail    //Sample Data's for Required fields
             {
                 BrandId = 3,
                 Subject = "Sample ticket1",
@@ -69,8 +70,9 @@ public class CreateTicket
                 LinkTypeId = 1,
                 LinkedTicketId = 63457,
             };
-
-            var ticketData2 = new Ticket2
+            
+            //Post data to creat ticket data.
+            var ticketData = new TicketData         //Sample Data's for Required fields
             {
                 BrandId = 4,
                 Subject = "Sample Ticket2",
@@ -149,7 +151,7 @@ public class Ticket
     public Dictionary<string, object?>? CustomFields { get; set; }
 }
 
-public class Ticket1
+public class TicketDetail
 {
     public int BrandId { get; set; }
 
@@ -178,7 +180,7 @@ public class Ticket1
     public long? LinkedTicketId { get; set; }
 }
 
-public class Ticket2
+public class TicketData
 {
     public int BrandId { get; set; }
 

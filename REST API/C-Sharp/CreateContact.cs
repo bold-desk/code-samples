@@ -26,7 +26,7 @@ public class Createcontact
         try
         {
             //Post data to create contacts.
-            var contactData = new Contact
+            var contact = new Contact
             {
                 ContactName = "Albert",
                 EmailId = "albert345@gmail.com",
@@ -44,11 +44,12 @@ public class Createcontact
                 IsVerified = true
             };
 
-            var contactData1 = new contact1
+            //Post data to create contact detail.
+            var contactDetail = new ContactDetail
             {
                 ContactDisplayName = "Shanmugam",
                 LanguageId = 1,
-                ContactName = "Shanmuga perumal",
+                ContactName = "Shanmuga perumal",                  //Sample Data's for Required fields..
                 EmailId = "Shanmugam567@gmail.com",
                 SecondaryEmailId = "Shanmugam854@gmail.com",
                 ContactPhoneNo = "8569374125",
@@ -116,7 +117,7 @@ public class Contact
 
 }
 
-public class contact1
+public class ContactDetail
 {
     public string ContactDisplayName { get; set; }
 

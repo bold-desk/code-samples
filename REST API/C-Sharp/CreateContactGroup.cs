@@ -26,7 +26,7 @@ public class CreateContactGroup
 
         try
         {
-            //Post data to create contacts.
+            //Post data to create contact groups.
             var contactGroupData = new ContactGroups
             {
                 ContactGroupName = "Administration",   //sample data...
