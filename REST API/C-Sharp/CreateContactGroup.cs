@@ -26,10 +26,22 @@ public class CreateContactGroup
 
         try
         {
-            //Post data to create contacts.
+            //Post data to create contact groups.
             var contactGroupData = new ContactGroups
             {
-                ContactGroupName = "Administration"   //sample data...
+                ContactGroupName = "Administration",   //sample data...
+                ContactGroupDescription = "Sample Description",
+                ContactGroupNotes = "Sample_Notes",
+                ContactGroupExternalReferenceId = "1",
+                ContactGroupAddress = "America",
+                ContactGroupTag = "Sample_Tag",
+                ContactGroupDomain = "yahodo.com, redhat.com",
+                CustomFields = new Dictionary<string, object?>
+                {
+                    { "cf_configure": "2023-09-16" },
+                    { "cf_contact_group_field_test": "test" },
+                    { "cf_group_report": "test"}
+                };
             };
 
             HttpResponseMessage response = await client.PostAsJsonAsync(apiPath, contactGroupData).ConfigureAwait(false);//To send a POST request as an asynchronous operation to the specified Uri with the given value serialized as JSON.
@@ -57,4 +69,18 @@ public class CreateContactGroup
 public class ContactGroups
 {
     public string ContactGroupName { get; set; }
+
+    public string ContactGroupDescription { get; set; }
+
+    public string ContactGroupNotes { get; set; }
+
+    public string ContactGroupExternalReferenceId { get; set; }
+
+    public string ContactGroupAddress { get; set; }
+
+    public string ContactGroupTag { get; set; }
+
+    public string ContactGroupDomain { get; set; }
+
+    public Dictionary<string, object?>? CustomFields { get; set; }
 }

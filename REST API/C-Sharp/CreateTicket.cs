@@ -26,12 +26,67 @@ public class CreateTicket
         try
         {
             //Post data to create ticket.
-            var ticketData = new Ticket    //Sample Data's for Required fields
+            var ticket = new Ticket    //Sample Data's for Required fields
             {
-                BrandId = 8,
-                Subject = "Sample",
-                Description = "Create ticket sample",
-                PriorityId = 2,             
+                BrandId = 3,
+                Subject = "Sample ticket",
+                CategoryId = 6321,
+                IsVisibileInCustomerPortal = true,
+                RequesterId = 13346,
+                Description = "<p>Sample ticket for testing</p>",
+                AgentId = 4120,
+                GroupId = 693,
+                Attachments = "tokenValue_1, tokenValue_2",
+                PriorityId = 2,
+                DueDate = "2022-02-16T12:38:29.766Z",
+                TypeId = 1,
+                Tag = "21st-june,1212,1/0,0.8777419652677063",
+                IsSpam = false,
+                RequesterEmailId = "Jhon123@gmail.com",
+                RequesterName = "Jhon",
+                ContactGroupId = 1,
+                PhoneNumber = "9562314786",
+                CustomFields = new Dictionary<string, object?>()
+                {
+                    { "cf_ticket_radio": true },
+                    { "cf_ticket_singleline": "Sample Single Line" }
+                };
+            };
+        
+            //Post data to create ticket detail.
+            var ticketDetail = new TicketDetail    //Sample Data's for Required fields
+            {
+                BrandId = 3,
+                Subject = "Sample ticket1",
+                Description = "<p>Create sample ticket</p>",
+                PriorityId = 2,
+                RequesterName = "Mathan",
+                CC = [12131, 13187, 9055],
+                ContactGroupId = 959 ,
+                WatchersUserId = "11956,6355,347",
+                IsDataConsentGiven = false,
+                AtMentionedUserIds = [13187, 347, 9055],
+                SkipEmailNotification = true,
+                LinkTypeId = 1,
+                LinkedTicketId = 63457,
+            };
+            
+            //Post data to creat ticket data.
+            var ticketData = new TicketData         //Sample Data's for Required fields
+            {
+                BrandId = 4,
+                Subject = "Sample Ticket2",
+                Description = "<p>Testing sample ticket</p>",
+                PriorityId = 2,
+                RequesterName = "Kavin",
+                CategoryId = 5654,
+                IsVisibileInCustomerPortal = true,
+                RequesterId =  13348,
+                AgentId = 12623,
+                AtMentionedUserIds = [347, 11956, 765],
+                SkipEmailNotification = false,
+                LinkTypeId = 1,
+                LinkedTicketId = 63458,
             };
 
             HttpResponseMessage response = await client.PostAsJsonAsync(apiPath, ticketData).ConfigureAwait(false);//To send a POST request as an asynchronous operation to the specified Uri with the given value serialized as JSON.
@@ -64,4 +119,92 @@ public class Ticket
     public string Description { get; set; }
 
     public int PriorityId { get; set; }
+
+    public string RequesterName { get; set; }
+
+    public long CategoryId { get; set; }
+
+    public bool IsVisibileInCustomerPortal { get; set; }
+
+    public long RequesterId { get; set; }
+
+    public long AgentId { get; set; }
+
+    public int GroupId { get; set; }
+
+    public string Attachments { get; set; }
+
+    public string DueDate { get; set; }
+
+    public long TypeId { get; set; }
+
+    public string Tag { get; set; }
+
+    public bool IsSpam { get; set; }
+
+    public string RequesterEmailId { get; set; }
+
+    public long ContactGroupId { get; set; }
+
+    public string PhoneNumber { get; set; }
+
+    public Dictionary<string, object?>? CustomFields { get; set; }
+}
+
+public class TicketDetail
+{
+    public int BrandId { get; set; }
+
+    public string Subject { get; set; }
+
+    public string Description { get; set; }
+
+    public int PriorityId { get; set; }
+
+    public string RequesterName { get; set; }
+
+    public List<long>? CC { get; set; }
+
+    public long? ContactGroupId { get; set; }
+
+    public string? WatchersUserId { get; set; }
+
+    public bool? IsDataConsentGiven { get; set; }
+
+    public List<long>? AtMentionedUserIds { get; set; }
+
+    public bool SkipEmailNotification { get; set; }
+
+    public int? LinkTypeId { get; set; }
+
+    public long? LinkedTicketId { get; set; }
+}
+
+public class TicketData
+{
+    public int BrandId { get; set; }
+
+    public string Subject { get; set; }
+
+    public string Description { get; set; }
+
+    public int PriorityId { get; set; }
+
+    public string RequesterName { get; set; }
+
+    public long CategoryId { get; set; }
+
+    public bool IsVisibileInCustomerPortal { get; set; }
+
+    public long RequesterId { get; set; }
+
+    public long AgentId { get; set; }
+
+    public List<long>? AtMentionedUserIds { get; set; }
+
+    public bool SkipEmailNotification { get; set; }
+
+    public int? LinkTypeId { get; set; }
+
+    public long? LinkedTicketId { get; set; }
 }

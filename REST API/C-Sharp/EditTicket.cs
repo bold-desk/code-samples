@@ -31,8 +31,20 @@ public class EditTicket
             {
                 fields = new Dictionary<string, object>()
                 {
-                    {"priorityId" , 2 }
+                    {"priorityId" , 2 },
+                    {"resolutionDue", "2021-06-15T04:48:00.000Z" },
+                    {"categoryId": 519 },
+                    {"isVisibleInCustomerPortal": false},
+                    {"groupId": 694},
+                    {"agentId": 4122},
+                    {"CC": [12131, 13187, 9055]},
+                    {"Subject": "Sample Ticket " },
+                    {"StatusId": 2},
+                    {"tag": "Sample_tag"},
+                    {"externalReferenceId": "AB321"},
+                    {"TypeId": 2}
                 },
+                Notes = "Sample Notes"
             };
 
             HttpResponseMessage response = await client.PutAsJsonAsync(apiPath, ticketData).ConfigureAwait(false);//To send a PUT request as an asynchronous operation to the specified Uri with the given value serialized as JSON.
@@ -59,4 +71,6 @@ public class EditTicket
 public class TicketUpdate
 {
     public Dictionary<string,object> fields { get; set; }
+    
+    public string Notes { get; set; }
 }
